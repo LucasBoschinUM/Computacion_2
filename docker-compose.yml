@@ -1,0 +1,17 @@
+services:
+  monitor:
+    build: .
+    container_name: tp1_monitoreo
+    # tty + stdin_open son obligatorios: sin ellos curses no encuentra
+    # terminal y la TUI no arranca.
+    tty: true
+    stdin_open: true
+    # pid: host permite ver TODOS los procesos de la maquina y no solo el
+    # namespace del contenedor. Si molesta, se puede comentar: el monitor
+    # funciona igual, pero solo lista los procesos de adentro.
+    pid: host
+    environment:
+      - TERM=xterm-256color
+    volumes:
+      # Para que los dumps de SIGUSR1 queden en el host.
+      - ./dumps:/app/dumps

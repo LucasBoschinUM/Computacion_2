@@ -1,0 +1,3 @@
+# Sin dependencias externas: la TUI usa curses (stdlib) y todo el parseo
+# de /proc esta hecho a mano. El archivo se deja para cumplir la
+# estructura pedida y para que `pip install -r` no falle.
