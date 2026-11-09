@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      WORKERS: "${WORKERS:-8}"
+      TAMANO_COLA: "1000"
+      TIMEOUT_DEFECTO: "60"
+      LIMITE_APAGADO: "15"
+    volumes:
+      # Los volcados y los resultados de las mediciones quedan en tu máquina.
+      - ./volcados:/srv/tp2/volcados
+      - ./mediciones/resultados:/srv/tp2/mediciones/resultados
+    # Tiempo que Docker espera antes del SIGKILL. Tiene que ser mayor que
+    # LIMITE_APAGADO; con los 10 s por defecto se perdería el volcado.
+    stop_grace_period: 30s
